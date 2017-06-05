@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap/css/bootstrap.min.css">
+  <title><%=head.title%></title>
+  <meta name="keywords" content='<%=head.keyWords%>'/>
+  <meta name="description" content="<%=head.desc%>"/>
+</head>
+<body>
+  <div id="content" class="login">
+      <div class="login-box col-sm-2">
+          <form action="?" method="post">
+            <header>Login</header>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username">
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
+                <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
+            </div>
+            <br/>
+            <div class="input-group x-full">
+                <button type="submit" class="btn btn-primary x-full">登录</button>
+            </div>
+          </form>
+      </div>
+  </div>
+  
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+html, body {
+  height: 100%;
+}
+a {
+  color: #00B7FF;
+}
+
+* {
+  margin:0;
+  padding:0;
+}
+.x-full {
+  width:100%;
+}
+.x-edge {
+  border-radius: 0 !important;
+}
+.login {
+  background: #00B7FF;
+  height:100%;
+}
+.login-box {
+  height:240px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 4px;
+}
+.login-box header {
+  font-size: 32px;
+  text-align: center;
+}
+
+.login-box .input-group span.input-group-addon {
+  position: relative;
+  top:0;
+}

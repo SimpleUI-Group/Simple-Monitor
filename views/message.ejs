@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%=message%></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div id="content">
+    <h1><%=message%></h1>
+    <h2>页面跳转中</h2>
+  </div>
+  <script>
+    setTimeout(function (){
+
+      <% if (type == 'success') { %>
+        window.location.href = '<%=path%>';
+      <% } else { %>
+        window.history.go(-1);
+      <%}%>  
+
+    }, 2000);
+  </script>
+</body>
+</html>
