@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap/css/bootstrap.min.css">
+  <title>
+    <%=head.title%>
+  </title>
+  <meta name="keywords" content='<%=head.keyWords%>' />
+  <meta name="description" content="<%=head.desc%>" />
+</head>
+
+<body>
+  <div id="content">
+    <% include header %>
+
+      <div class="main">
+        <% include left %>
+          <div class="right-content">
+            <div class="main-content">
+              <br/>
+              <div class="page-header">
+                <h1>uid:<%=detail.uid%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date:<%=detail.date%></h1>
+               </div>
+               <br/>
+              <pre><%=JSON.stringify(detail, null, 4)%></pre>
+
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

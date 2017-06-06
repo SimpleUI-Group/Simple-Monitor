@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./SimpleMonitor.js"></script>
+
+    <script>
+        SMonitor.config({
+            url:'/log/send'
+        });
+        window.onerror = function () {
+            SMonitor.send({
+                'uid':123,
+                'type':'test',
+                'info':JSON.stringify(arguments),
+                'message':JSON.stringify(arguments)
+            });
+        }
+
+        a;
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -40,3 +40,52 @@ a {
   position: relative;
   top:0;
 }
+#content {height:100%;}
+.navbar {margin-bottom:0 !important;}
+
+.main {
+  height:100%;
+  padding-top: 50px;
+  margin-top: -51px;
+  box-sizing: border-box;
+}
+
+.left {
+  width:200px;
+  background: #666;
+  float: left;
+  height: 100%;
+  margin-right:-200px;
+}
+.right-content {
+  margin-left: 200px;
+  height:100%;
+  position: relative;
+  background: #eaeaea;
+}
+
+.left ul {
+  margin:0;
+  height:100%;
+  padding-top:20px;
+  box-sizing: border-box;
+}
+.left ul li {
+  height:40px;
+  line-height: 40px;
+  font-size: 16px;
+  color:#fff;
+  text-indent: 25px;
+}
+.left ul li a {color:#fff;}
+
+.main-content {
+  position: absolute;
+  top:20px;
+  left:20px;
+  right:20px;
+  bottom:40px;
+  background: #fff;
+  padding:30px 20px;
+}
+

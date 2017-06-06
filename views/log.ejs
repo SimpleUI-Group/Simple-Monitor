@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap/css/bootstrap.min.css">
+  <title>
+    <%=head.title%>
+  </title>
+  <meta name="keywords" content='<%=head.keyWords%>' />
+  <meta name="description" content="<%=head.desc%>" />
+</head>
+
+<body>
+  <div id="content">
+    <% include header %>
+
+      <div class="main">
+        <% include left %>
+          <div class="right-content">
+            <div class="main-content">
+              <form class="form-inline" method="post" action="?">
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputEmail3">日期</label>
+                  <input type="date" class="form-control" id="exampleInputEmail3" placeholder="日期">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword3">条件</label>
+                  <input type="test" class="form-control" id="exampleInputPassword3" placeholder="key1:value1,key2:value2" style="width:400px">
+                </div>
+                <button type="submit" class="btn btn-default">query</button>
+              </form>
+              <br/>
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th width="5%">#</th>
+                    <th width="20%">uid</th>
+                    <th width="20%">date</th>
+                    <th width="45%">info</th>
+                    <th width="10%">action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% list.forEach(function (v,i,a) { %>
+                  <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%=v.uid%></td>
+                    <td><%=v.date%></td>
+                    <td><%=v.info%></td>
+                    <td><a href="/log/detail?type=test&date=<%=v.date%>&num=<%=i%>" class="btn btn-default">detail</a></td>
+                  </tr>
+                  <% })%>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
