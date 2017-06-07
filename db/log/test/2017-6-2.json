@@ -1,1 +1,0 @@
-[{"uid":123,"type":"test","info":{"0":"Uncaught ReferenceError: a is not defined","1":"http://localhost:3000/tmp/test.html","2":23,"3":9,"4":{}},"message":{"0":"Uncaught ReferenceError: a is not defined","1":"http://localhost:3000/tmp/test.html","2":23,"3":9,"4":{}},"date":"2017-6-2 18:45:40"}]

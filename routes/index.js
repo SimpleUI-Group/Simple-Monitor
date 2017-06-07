@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
 
   commonModule.isLogin(req, res, next);
 
-  res.render('index', { head: commonModule.head, userInfo: commonModule.userInfo(req)});
+  router.redirect('/log');
+  
 });
 
 module.exports = router;

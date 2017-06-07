@@ -45,8 +45,8 @@ a {
 
 .main {
   height:100%;
-  padding-top: 50px;
-  margin-top: -51px;
+  padding-top: 52px;
+  margin-top: -52px;
   box-sizing: border-box;
 }
 
@@ -62,6 +62,7 @@ a {
   height:100%;
   position: relative;
   background: #eaeaea;
+  overflow-y: auto;
 }
 
 .left ul {
@@ -81,11 +82,15 @@ a {
 
 .main-content {
   position: absolute;
-  top:20px;
-  left:20px;
-  right:20px;
-  bottom:40px;
-  background: #fff;
-  padding:30px 20px;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
 }
 
+.box-content {
+  margin:20px 20px 40px;
+  background: #fff;
+  padding:30px 20px;
+  box-sizing: border-box;
+}
