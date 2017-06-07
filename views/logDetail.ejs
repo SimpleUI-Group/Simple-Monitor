@@ -22,13 +22,15 @@
         <% include left %>
           <div class="right-content">
             <div class="main-content">
-              <br/>
-              <div class="page-header">
-                <h1>uid:<%=detail.uid%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date:<%=detail.date%></h1>
-               </div>
-               <br/>
-              <pre><%=JSON.stringify(detail, null, 4)%></pre>
-
+              <div class="box-content">
+                <br/>
+                <div class="page-header">
+                  <h1>uid:<%=detail.uid%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date:<%=detail.date%></h1>
+                </div>
+                <br/>
+                <pre><%=JSON.stringify(detail, null, 4)%></pre>
+              </div>
+              
             </div>
           </div>
       </div>
