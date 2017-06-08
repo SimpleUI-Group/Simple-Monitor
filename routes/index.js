@@ -4,11 +4,11 @@ var router = express.Router();
 const commonModule = require('../module/common');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 
   commonModule.isLogin(req, res, next);
 
-  router.redirect('/log');
+  res.redirect('/log');
   
 });
 

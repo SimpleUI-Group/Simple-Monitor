@@ -4,11 +4,12 @@ const fs = require('fs');
 
 const commonModule = require('../module/common');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+/* render today log */
+router.get('/', (req, res, next) => {
 
   let nowDate = req.query['date'], nowUid='';
 
+  // default date is today
   if(!req.query['date']) {
 
       let nowTime = new Date(),
@@ -18,53 +19,62 @@ router.get('/', function(req, res, next) {
       nowDateStr = nowTime.getDate();
 
 
-      nowDate = nowTime.getFullYear() + '-' + (nowMonth < 10 ? '0' + nowMonth : nowMonth) + '-' + (nowDateStr < 10 ? '0' + nowDateStr : nowDateStr);
-  }
-  let dblog;
-  
-  try {
-    dblog = fs.readFileSync('../db/log/' + nowDate + '.json', 'utf-8');
-    dblog = JSON.parse(dblog);
+      nowDate = `${nowTime.getFullYear()}-${nowMonth < 10 ? '0' + nowMonth : nowMonth}-${nowDateStr < 10 ? '0' + nowDateStr : nowDateStr}`;
 
-
-  }catch(e) {
-
-    dblog = [];
   }
 
-  commonModule.isLogin(req, res, next);
-
-  let listData = commonModule.getDataFromQueryString(req, dblog);
 
 
-  res.cookie('uid', req.cookies.uid, { expires: new Date(Date.now() + 3600000), httpOnly: true, domain: req.domain, path: '/'});
-  res.render('log', { 
-      head: commonModule.head, 
-      userInfo: commonModule.userInfo(req), 
-      list: listData, 
-      formkey:{
-        date:req.query['date'] || '',
-        searchkey:req.query['searchkey'] || '',
-      }
-  });
+  fs.readFile(`${__dirname}/../db/log/${nowDate}.json`, 'utf-8', (err, data) => {
 
-  dblog = [];
-  listData = [];
+
+        let dblog = [],
+            listData=[];
+
+        // not err dblog is data
+        if (!err) {
+            dblog = JSON.parse(data);
+        }
+
+
+        commonModule.isLogin(req, res, next);
+
+        //queryString to parser listdata
+        listData = commonModule.getDataFromQueryString(req, dblog);
+
+        commonModule.setCookie(req, res, 'uid');
+
+        res.render('log', { 
+            head: commonModule.head, 
+            userInfo: commonModule.userInfo(req), 
+            list: listData, 
+            formkey:{
+              date:req.query['date'] || '',
+              searchkey:req.query['searchkey'] || '',
+            }
+        });
+
+        //clear somethings
+        dblog = null;
+        listData = null;
+
+    });
 });
 
 
-router.get('/detail', function(req, res, next) {
+router.get('/detail', (req, res, next) => {
   
-  const dblog = require('../db/log/' + req.query['date'])[req.query['num']-1];
+  const dblog = require(`${__dirname}/../db/log/${req.query['date']}`)[req.query['num']-1];
 
   commonModule.isLogin(req, res, next);
 
-  res.cookie('uid', req.cookies.uid, { expires: new Date(Date.now() + 3600000), httpOnly: true, domain: req.domain, path: '/'});
+  commonModule.setCookie(req, res, 'uid');
+
   res.render('logDetail', { head: commonModule.head, userInfo: commonModule.userInfo(req), detail: dblog});
 });
 
 
-router.post('/send', function(req, res, next) {
+router.post('/send', (req, res, next) => {
 
   let result = {result:'1'};
 
@@ -74,8 +84,12 @@ router.post('/send', function(req, res, next) {
   for(let item in data) {
 
     try {
+
       data[item] = JSON.parse(data[item]);
-    }catch(e) {}
+
+    }catch(e) {
+
+    }
   }
 
   let nowTime = new Date(),
@@ -91,14 +105,17 @@ router.post('/send', function(req, res, next) {
 
       data['date'] += ' ' + nowTime.getHours() + ':' + nowTime.getMinutes() + ':' + nowTime.getSeconds()
 
-      fs.readFile('../db/log/' + data['datedir'] + '.json', 'utf-8', function (err, data2) {
+
+      fs.readFile(`${__dirname}/../db/log/${data['datedir']}.json`, 'utf-8', (err, data2) => {
 
 
         let nowData = [];
             data['id'] = 1;
             nowData.push(data);
 
+
         if(!err) {
+
           nowData = JSON.parse(data2);
           data['id'] = nowData.length + 1;
           nowData.push(data);
@@ -106,8 +123,10 @@ router.post('/send', function(req, res, next) {
 
 
 
-        fs.writeFile('../db/log/' + data['datedir'] + '.json', JSON.stringify(nowData), function(err) {
+        fs.writeFile(`${__dirname}/../db/log/${data['datedir']}.json`, JSON.stringify(nowData), (err) => {
+
           if (err) {
+
               res.send("{'result': '0'}");
               return;
           }

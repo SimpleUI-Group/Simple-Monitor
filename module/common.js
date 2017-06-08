@@ -7,7 +7,7 @@ exports.head = {
     desc:CONFIG_MAIN.desc,
 }
 
-exports.isLogin = function (req, res, next) {
+exports.isLogin = (req, res, next) => {
 
     if (req.path != '/login' && !req.cookies.uid) {
  
@@ -17,18 +17,31 @@ exports.isLogin = function (req, res, next) {
     }
 
     if(!dbUsers[req.cookies.uid]) {
-        
+
         res.redirect('/login');
         return;  
     }
 }
 
-exports.userInfo = function (req) {
+exports.userInfo = (req) => {
 
     return req.cookies.uid
 }
 
-exports.getDataFromQueryString = function (req, data) {
+exports.setCookie = (req, res, key, value) => {
+
+    let cookieValue = value;
+
+    if(!value) {
+
+        cookieValue = req.cookies[key];
+    }
+
+    res.cookie(key, cookieValue, { expires: new Date(Date.now() + 3600000), httpOnly: true, domain: req.domain, path: '/'});
+}
+
+
+exports.getDataFromQueryString = (req, data) => {
 
     let json = {};
     let arr = [];
@@ -38,7 +51,7 @@ exports.getDataFromQueryString = function (req, data) {
 
         arr = req.query['searchkey'].split(',');
 
-        arr.forEach(function (v,i,a) {
+        arr.forEach((v,i,a) => {
 
             let via = v.split(':');
             json[via[0]] = via[1];
@@ -55,9 +68,9 @@ exports.getDataFromQueryString = function (req, data) {
     return data;
 }
 
-exports.getData = function (item, val, data) {
+exports.getData = (item, val, data) => {
 
-   return data.filter(function(v,i,a) {
+   return data.filter((v,i,a) => {
         
         return v[item] ? v[item] == val : false;
     });
