@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,9 @@
     <script src="./SimpleMonitor.js"></script>
 
     <script>
-
         //配置 请求 api  地址 
         SMonitor.config({
-            url:'/log/send'
+            url: '/log/send'
         });
 
 
@@ -19,15 +19,15 @@
         //这里 使用 try catch 抓错
         try {
             JSON.parse('a');
-        }catch(e) {
+        } catch (e) {
             SMonitor.send({
-                'uid':'try',
-                'type':'trycatch',
-                'info':'try 抓到错误 JSON.parse',
-                'name':e.name,
-                'message':e.message,
-                'key':'value', //自定义字段
-                'key2':'value2', //自定义字段
+                'uid': 'try',
+                'type': 'trycatch',
+                'info': 'try 抓到错误 JSON.parse',
+                'name': e.name,
+                'message': e.message,
+                'key': 'value', //自定义字段
+                'key2': 'value2', //自定义字段
             });
         }
 
@@ -36,12 +36,12 @@
         //这里使用 onerror 抓错 并 调用 send
         window.onerror = function () {
             SMonitor.send({
-                'uid':'onerror',
-                'type':'onerrorMessage',
-                'info':JSON.stringify(arguments),
-                'message':JSON.stringify(arguments),
-                'a':'1',//自定义字段
-            });
+                'uid': 'onerror',
+                'type': 'onerrorMessage',
+                'info': JSON.stringify(arguments),
+                'message': JSON.stringify(arguments),
+                'a': '1',//自定义字段
+            }, true);
         }
 
 
@@ -54,27 +54,27 @@
 
         //这里开始模拟用户操作
 
-        SMonitor.cache('action','用户点击了第一步的按钮');
-        SMonitor.cache('action','用户点击了第二步的按钮');
-        SMonitor.cache('action','用户点击了第三步的按钮');
+        SMonitor.cache('action', '用户点击了第一步的按钮');
+        SMonitor.cache('action', '用户点击了第二步的按钮');
+        SMonitor.cache('action', '用户点击了第三步的按钮');
 
         //这里模拟用户操作结束,将整个步骤发送出去
         setTimeout(function () {
 
             SMonitor.send({
-                'uid':'action',
-                'type':'userAction',
-                'info':'模拟用户操作',
-                'message':SMonitor.getCache('action'),
-                'key2':'value2',//自定义字段
+                'uid': 'action',
+                'type': 'userAction',
+                'info': '模拟用户操作',
+                'message': SMonitor.getCache('action'),
+                'key2': 'value2',//自定义字段
             });
 
-        },2000)
-
-
+        }, 2000)
     </script>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

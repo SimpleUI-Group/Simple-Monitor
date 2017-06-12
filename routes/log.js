@@ -64,13 +64,21 @@ router.get('/', (req, res, next) => {
 
 router.get('/detail', (req, res, next) => {
   
-  const dblog = require(`${__dirname}/../db/log/${req.query['date']}`)[req.query['num']-1];
+  fs.readFile(`${__dirname}/../db/log/${req.query['date']}.json`, 'utf-8', (err, data) => {
 
-  commonModule.isLogin(req, res, next);
+    if(err) {
+      res.end('出错了!');
+      return;
+    }
 
-  commonModule.setCookie(req, res, 'uid');
+    const dblog = JSON.parse(data)[req.query['num']-1];
 
-  res.render('logDetail', { head: commonModule.head, userInfo: commonModule.userInfo(req), detail: dblog});
+    commonModule.isLogin(req, res, next);
+
+    commonModule.setCookie(req, res, 'uid');
+    res.render('logDetail', { head: commonModule.head, userInfo: commonModule.userInfo(req), detail: dblog});
+
+  });
 });
 
 
