@@ -125,8 +125,9 @@ router.post('/send', (req, res, next) => {
 
         fs.writeFile(`${__dirname}/../db/log/${data['datedir']}.json`, JSON.stringify(nowData), (err) => {
 
-          if (err) {
+          res.header("Access-Control-Allow-Origin", "*");
 
+          if (err) {
               res.send("{'result': '0'}");
               return;
           }
