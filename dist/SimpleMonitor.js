@@ -38,13 +38,19 @@
          *   message:''
          * }
          */
-        send: function (data) {
+        send: function (data, isSendAll) {
 
             var timeout = null;
 
             timeout = setTimeout(function () {
 
                 config.data = data;
+
+                if(isSendAll) {
+
+                    config.data.step = JSON.stringify(cacheData);
+                }
+
                 request(config);
 
                 clearTimeout(timeout);
